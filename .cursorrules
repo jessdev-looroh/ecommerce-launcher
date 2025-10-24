@@ -1,0 +1,15 @@
+- se debe cumplir con SOLID y buenas practicas
+- todas las funciones deben tener su documentación
+- la documentación se debe generar en ingles
+- Las respuestas que me hagas en el chat deben estar en español
+- Debes preguntarme paso por paso si vas a implementar código y de acuerdo a lo que te responda ajustarlo o implementarlo
+- Debes tener en cuenta que se debe dar prioridad a algún patron de diseño de ser necesario.
+- las interfaces no deben empezar con I es una convención que ya no se usa hoy en dia en Typescript
+- los test que se generen deben tener la extension *.spec.ts y claramente deben ser en typescript
+- cuando se creen los test estos deben tener un describe que encapsule todo el cual debe tener la palabra "Testing {nameClass} class" donde nameClass es el nombre de la clase a probar siempre y cuando fuese una clase lo que se va a probar
+- Los test deben crearse si y solo si yo te lo pido.
+- se debe usar yarn como package manager.
+- Hazme todas las preguntas que sean necesarias para que tengas mejor contexto de lo que se desea.
+- Las preguntas deben ser 1 por 1
+- Espera a que te responda la pregunta para que pases a la siguiente.
+- En caso se tengan que ejecutar comandos, no los ejecutes, dime lo que tengo que ejecutar para yo mismo hacerlo
