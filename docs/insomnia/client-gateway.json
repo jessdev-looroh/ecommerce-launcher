@@ -1,0 +1,963 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-10-29T00:00:00.000Z",
+  "__export_source": "qe-hay-generator",
+  "resources": [
+    {
+      "_id": "wrk_qehay_client_gateway",
+      "_type": "workspace",
+      "name": "QeHay - Client Gateway",
+      "scope": "collection"
+    },
+    {
+      "_id": "env_qehay_base",
+      "_type": "environment",
+      "parentId": "wrk_qehay_client_gateway",
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "jwt": "<YOUR_JWT_TOKEN>"
+      }
+    },
+    {
+      "_id": "fld_products_submodules",
+      "_type": "request_group",
+      "parentId": "wrk_qehay_client_gateway",
+      "name": "Products / Submodules"
+    },
+    {
+      "_id": "fld_prod_images",
+      "_type": "request_group",
+      "parentId": "fld_products_submodules",
+      "name": "Product Images"
+    },
+    {
+      "_id": "req_prod_image_create",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Create image",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/images",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"url\": \"https://example.com/image.jpg\",\n  \"isPrimary\": true\n}"
+      }
+    },
+    {
+      "_id": "req_prod_image_bulk",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Bulk create images",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/images/bulk",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"images\": [\n    { \"url\": \"https://example.com/1.jpg\", \"isPrimary\": true },\n    { \"url\": \"https://example.com/2.jpg\" }\n  ]\n}"
+      }
+    },
+    {
+      "_id": "req_prod_image_list",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "List images",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/images",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_image_find_one",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Find image by id",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/images/{{ imageId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_image_update",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Update image",
+      "method": "PATCH",
+      "url": "{{ base_url }}/products/{{ productId }}/images/{{ imageId }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"url\": \"https://example.com/new.jpg\",\n  \"isPrimary\": false\n}"
+      }
+    },
+    {
+      "_id": "req_prod_image_set_primary",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Set primary image",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/images/{{ imageId }}/set-primary",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_image_delete",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Delete image",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/images/{{ imageId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_image_delete_all",
+      "_type": "request",
+      "parentId": "fld_prod_images",
+      "name": "Delete all images",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/images/all",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_prod_sizes",
+      "_type": "request_group",
+      "parentId": "fld_products_submodules",
+      "name": "Product Sizes"
+    },
+    {
+      "_id": "req_prod_size_create",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "Create size",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Medium\",\n  \"price\": 12.5,\n  \"status\": true\n}"
+      }
+    },
+    {
+      "_id": "req_prod_size_list",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "List sizes",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_size_find_one",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "Find size by id",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_size_replace",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "Replace sizes",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes/bulk",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"sizes\": [\n    { \"name\": \"Small\", \"price\": 9.99, \"status\": true },\n    { \"name\": \"Large\", \"price\": 14.99 }\n  ],\n  \"deletedBy\": \"{{ userId }}\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_size_update",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "Update size",
+      "method": "PATCH",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"XL\",\n  \"price\": 15.99,\n  \"status\": false\n}"
+      }
+    },
+    {
+      "_id": "req_prod_size_delete",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "Delete size",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_size_delete_all",
+      "_type": "request",
+      "parentId": "fld_prod_sizes",
+      "name": "Delete all sizes",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/sizes",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_prod_schedules",
+      "_type": "request_group",
+      "parentId": "fld_products_submodules",
+      "name": "Product Schedules"
+    },
+    {
+      "_id": "req_prod_schedule_create",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Create schedule",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"dayOfWeek\": 1,\n  \"startTime\": \"09:00\",\n  \"endTime\": \"18:00\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_schedule_list",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "List schedules",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_schedule_find_one",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Find schedule by id",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_schedule_replace",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Replace schedules",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules/bulk",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"schedules\": [\n    { \"dayOfWeek\": 0, \"startTime\": \"10:00\", \"endTime\": \"16:00\" },\n    { \"dayOfWeek\": 6, \"startTime\": \"12:00\", \"endTime\": \"20:00\" }\n  ]\n}"
+      }
+    },
+    {
+      "_id": "req_prod_schedule_availability",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Check availability",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules/availability",
+      "parameters": [
+        { "name": "dayOfWeek", "value": "1" },
+        { "name": "time", "value": "11:30" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_schedule_update",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Update schedule",
+      "method": "PATCH",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"dayOfWeek\": 2,\n  \"startTime\": \"08:00\",\n  \"endTime\": \"12:00\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_schedule_delete",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Delete schedule",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_schedule_delete_all",
+      "_type": "request",
+      "parentId": "fld_prod_schedules",
+      "name": "Delete all schedules",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/schedules",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_prod_recipes",
+      "_type": "request_group",
+      "parentId": "fld_products_submodules",
+      "name": "Product Recipes"
+    },
+    {
+      "_id": "req_prod_recipe_create",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "Create recipe entry",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"ingredientId\": \"{{ ingredientId }}\",\n  \"quantity\": 2,\n  \"unit\": \"g\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_recipe_list",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "List recipe entries",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_recipe_find_one",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "Find recipe by id",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_recipe_replace",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "Replace recipes",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes/bulk",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"recipes\": [\n    { \"ingredientId\": \"{{ ingredientId }}\", \"quantity\": 1, \"unit\": \"unit\" },\n    { \"ingredientId\": \"{{ ingredientId2 }}\", \"quantity\": 100, \"unit\": \"g\" }\n  ]\n}"
+      }
+    },
+    {
+      "_id": "req_prod_recipe_update",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "Update recipe entry",
+      "method": "PATCH",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"ingredientId\": \"{{ ingredientId }}\",\n  \"quantity\": 3,\n  \"unit\": \"ml\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_recipe_delete",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "Delete recipe entry",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_recipe_delete_all",
+      "_type": "request",
+      "parentId": "fld_prod_recipes",
+      "name": "Delete all recipes",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/recipes",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_prod_questions",
+      "_type": "request_group",
+      "parentId": "fld_products_submodules",
+      "name": "Product Questions"
+    },
+    {
+      "_id": "req_prod_question_create",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "Create product-question",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/questions",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"questionId\": \"{{ questionId }}\",\n  \"position\": 0,\n  \"itemType\": \"ITEM\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_question_list",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "List product-questions",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/questions",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_question_list_by_type",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "List by type",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/questions/type/{{ type }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_question_find_one",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "Find relationship by id",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/questions/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_question_replace",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "Replace product-questions",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/questions/bulk",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"questions\": [\n    { \"questionId\": \"{{ questionId }}\", \"position\": 0, \"itemType\": \"ITEM\" }\n  ]\n}"
+      }
+    },
+    {
+      "_id": "req_prod_question_update",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "Update product-question",
+      "method": "PATCH",
+      "url": "{{ base_url }}/products/{{ productId }}/questions/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"position\": 1,\n  \"itemType\": \"PRODUCT\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_question_delete",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "Delete product-question",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/questions/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_question_delete_all",
+      "_type": "request",
+      "parentId": "fld_prod_questions",
+      "name": "Delete all product-questions",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/questions",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_prod_tags",
+      "_type": "request_group",
+      "parentId": "fld_products_submodules",
+      "name": "Product Tags"
+    },
+    {
+      "_id": "req_prod_tag_create",
+      "_type": "request",
+      "parentId": "fld_prod_tags",
+      "name": "Create product-tag",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/tags",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tagId\": \"{{ tagId }}\"\n}"
+      }
+    },
+    {
+      "_id": "req_prod_tag_list",
+      "_type": "request",
+      "parentId": "fld_prod_tags",
+      "name": "List product-tags",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/tags",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_tag_find_one",
+      "_type": "request",
+      "parentId": "fld_prod_tags",
+      "name": "Find product-tag by id",
+      "method": "GET",
+      "url": "{{ base_url }}/products/{{ productId }}/tags/{{ tagId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_tag_replace",
+      "_type": "request",
+      "parentId": "fld_prod_tags",
+      "name": "Replace product-tags",
+      "method": "POST",
+      "url": "{{ base_url }}/products/{{ productId }}/tags/bulk",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"tagIds\": [\n    \"{{ tagId }}\", \"{{ tagId2 }}\"\n  ]\n}"
+      }
+    },
+    {
+      "_id": "req_prod_tag_delete",
+      "_type": "request",
+      "parentId": "fld_prod_tags",
+      "name": "Delete product-tag",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/tags/{{ tagId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_prod_tag_delete_all",
+      "_type": "request",
+      "parentId": "fld_prod_tags",
+      "name": "Delete all product-tags",
+      "method": "DELETE",
+      "url": "{{ base_url }}/products/{{ productId }}/tags",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_questions",
+      "_type": "request_group",
+      "parentId": "wrk_qehay_client_gateway",
+      "name": "Questions"
+    },
+    {
+      "_id": "req_question_create",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Create question",
+      "method": "POST",
+      "url": "{{ base_url }}/questions",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"How spicy?\",\n  \"required\": true,\n  \"min\": 0,\n  \"max\": 5,\n  \"type\": \"RANGE\"\n}"
+      }
+    },
+    {
+      "_id": "req_question_list",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "List questions",
+      "method": "GET",
+      "url": "{{ base_url }}/questions",
+      "parameters": [
+        { "name": "page", "value": "1" },
+        { "name": "limit", "value": "10" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_question_search",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Search by name",
+      "method": "GET",
+      "url": "{{ base_url }}/questions/search",
+      "parameters": [
+        { "name": "name", "value": "spicy" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_question_by_type",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Find by type",
+      "method": "GET",
+      "url": "{{ base_url }}/questions/type/{{ type }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_question_by_product",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Find by product",
+      "method": "GET",
+      "url": "{{ base_url }}/questions/product/{{ productId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_question_find_one",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Find question by id",
+      "method": "GET",
+      "url": "{{ base_url }}/questions/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_question_update",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Update question",
+      "method": "PATCH",
+      "url": "{{ base_url }}/questions/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"How many sauces?\",\n  \"required\": false,\n  \"min\": 0,\n  \"max\": 3,\n  \"type\": \"RANGE\"\n}"
+      }
+    },
+    {
+      "_id": "req_question_delete",
+      "_type": "request",
+      "parentId": "fld_questions",
+      "name": "Delete question",
+      "method": "DELETE",
+      "url": "{{ base_url }}/questions/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_tags",
+      "_type": "request_group",
+      "parentId": "wrk_qehay_client_gateway",
+      "name": "Tags"
+    },
+    {
+      "_id": "req_tag_create",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Create tag",
+      "method": "POST",
+      "url": "{{ base_url }}/tags",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Spicy\"\n}"
+      }
+    },
+    {
+      "_id": "req_tag_list",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "List tags",
+      "method": "GET",
+      "url": "{{ base_url }}/tags",
+      "parameters": [
+        { "name": "page", "value": "1" },
+        { "name": "limit", "value": "10" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_tag_search",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Search by name",
+      "method": "GET",
+      "url": "{{ base_url }}/tags/search",
+      "parameters": [
+        { "name": "name", "value": "Spicy" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_tag_most_used",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Most used tags",
+      "method": "GET",
+      "url": "{{ base_url }}/tags/most-used",
+      "parameters": [
+        { "name": "limit", "value": "5" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_tag_by_product",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Find by product",
+      "method": "GET",
+      "url": "{{ base_url }}/tags/product/{{ productId }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_tag_find_one",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Find tag by id",
+      "method": "GET",
+      "url": "{{ base_url }}/tags/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_tag_update",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Update tag",
+      "method": "PATCH",
+      "url": "{{ base_url }}/tags/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Very Spicy\"\n}"
+      }
+    },
+    {
+      "_id": "req_tag_delete",
+      "_type": "request",
+      "parentId": "fld_tags",
+      "name": "Delete tag",
+      "method": "DELETE",
+      "url": "{{ base_url }}/tags/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+
+    {
+      "_id": "fld_ingredients",
+      "_type": "request_group",
+      "parentId": "wrk_qehay_client_gateway",
+      "name": "Ingredients"
+    },
+    {
+      "_id": "req_ingredient_create",
+      "_type": "request",
+      "parentId": "fld_ingredients",
+      "name": "Create ingredient",
+      "method": "POST",
+      "url": "{{ base_url }}/ingredients",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Salt\",\n  \"unit\": \"g\"\n}"
+      }
+    },
+    {
+      "_id": "req_ingredient_list",
+      "_type": "request",
+      "parentId": "fld_ingredients",
+      "name": "List ingredients",
+      "method": "GET",
+      "url": "{{ base_url }}/ingredients",
+      "parameters": [
+        { "name": "page", "value": "1" },
+        { "name": "limit", "value": "10" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_ingredient_search",
+      "_type": "request",
+      "parentId": "fld_ingredients",
+      "name": "Search by name",
+      "method": "GET",
+      "url": "{{ base_url }}/ingredients/search",
+      "parameters": [
+        { "name": "name", "value": "Salt" }
+      ],
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_ingredient_find_one",
+      "_type": "request",
+      "parentId": "fld_ingredients",
+      "name": "Find ingredient by id",
+      "method": "GET",
+      "url": "{{ base_url }}/ingredients/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    },
+    {
+      "_id": "req_ingredient_update",
+      "_type": "request",
+      "parentId": "fld_ingredients",
+      "name": "Update ingredient",
+      "method": "PATCH",
+      "url": "{{ base_url }}/ingredients/{{ id }}",
+      "headers": [
+        { "name": "Content-Type", "value": "application/json" },
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ],
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Sea Salt\",\n  \"unit\": \"g\"\n}"
+      }
+    },
+    {
+      "_id": "req_ingredient_delete",
+      "_type": "request",
+      "parentId": "fld_ingredients",
+      "name": "Delete ingredient",
+      "method": "DELETE",
+      "url": "{{ base_url }}/ingredients/{{ id }}",
+      "headers": [
+        { "name": "Authorization", "value": "Bearer {{ jwt }}" }
+      ]
+    }
+  ]
+}
+
+

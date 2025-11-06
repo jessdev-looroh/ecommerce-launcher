@@ -1,15 +1,52 @@
-- se debe cumplir con SOLID y buenas practicas
-- todas las funciones deben tener su documentación
-- la documentación se debe generar en ingles
-- Las respuestas que me hagas en el chat deben estar en español
-- Debes preguntarme paso por paso si vas a implementar código y de acuerdo a lo que te responda ajustarlo o implementarlo
-- Debes tener en cuenta que se debe dar prioridad a algún patron de diseño de ser necesario.
-- las interfaces no deben empezar con I es una convención que ya no se usa hoy en dia en Typescript
-- los test que se generen deben tener la extension *.spec.ts y claramente deben ser en typescript
-- cuando se creen los test estos deben tener un describe que encapsule todo el cual debe tener la palabra "Testing {nameClass} class" donde nameClass es el nombre de la clase a probar siempre y cuando fuese una clase lo que se va a probar
-- Los test deben crearse si y solo si yo te lo pido.
-- se debe usar yarn como package manager.
-- Hazme todas las preguntas que sean necesarias para que tengas mejor contexto de lo que se desea.
-- Las preguntas deben ser 1 por 1
-- Espera a que te responda la pregunta para que pases a la siguiente.
-- En caso se tengan que ejecutar comandos, no los ejecutes, dime lo que tengo que ejecutar para yo mismo hacerlo
+# Archivo: .cursorrules
+
+projectContext:
+  name: QeHay
+  description: >
+    QeHay es un sistema avanzado de gestión de restaurantes híbrido (offline/online).
+    Sus módulos principales son:
+      - Cliente: App Movil/Web (React Native/ React) conectada a la nube, que permite a los clientes ver el menú, realizar pedidos, generar códigos QR y seguir el estado de su orden en tiempo real. 
+        El cliente puede generar 3 tipos de orden IN_DINNER, DELIVERY y PICKUP 
+      - Mozo: (App Flutter) Módulo para meseros, disponible localmente, que escanea el QR del cliente,
+        confirma la orden y la envía a cocina.
+      - Cocina: (App Flutter) Módulo local que muestra pedidos y estados (pendiente, cocinando, listo).
+      - Administración: Módulo en la nube que gestiona inventario, menús, categorías, precios y stock.
+      - Inteligencia Artificial: Motor configurable mediante prompts que ayuda con análisis,
+        recomendaciones y automatización de la gestión del restaurante.
+
+    Tecnologías principales:
+      - Frontend: React (web) y Flutter (móvil).
+      - Backend: FastAPI (Python), NestJS (NodeJS), Serverless
+      - Infraestructura: AWS (SNS, SQS, Lambda, API Gateway, RDS PostgreSQL, DynamoDB, MongoDB).
+      - Bases de datos:
+          * PostgreSQL: Entidades principales (Ordenes, OrdenItem).
+          * DynamoDB: Eventos, sesiones y registros de estado.
+          * MongoDB: Usuarios
+          * Base vectorial (ej. Pinecone, Qdrant o Weaviate): Para la IA y búsquedas inteligentes.
+      - Autenticación:
+          * Microservicio propio con JWT para módulos locales y online (mozo y cocina).
+          * Permite autenticación anónima
+
+rules:
+  - Aplicar siempre principios **SOLID**, **Clean Code** y **Buenas Practicas**.
+  - todas las funciones deben tener su documentación
+  - la documentación se debe generar en ingles
+  - Proponer soluciones modulares, mantenibles, escalables y seguras.
+  - Considerar que los módulos **mozo y cocina deben funcionar offline**, con sincronización posterior. (n8n)
+  - Evitar dependencias innecesarias y priorizar las tecnologías ya definidas en el proyecto.
+  - Para toda propuesta de solución, **hacer preguntas necesarias de una en una**, esperando la respuesta
+    antes de pasar a la siguiente.
+  - Explicar siempre las decisiones técnicas con sus ventajas y posibles desventajas.
+  - El código propuesto debe ser claro, comentado y fácil de extender.
+  - Respetar patrones de buenas prácticas en arquitectura distribuida y orientada a eventos.
+  - Considerar la integración de la IA con los datos del restaurante mediante embeddings y consultas
+    a la base vectorial.
+  - Mantener consistencia en la nomenclatura y en los estándares de calidad del proyecto.
+  - Las respuestas que me hagas en el chat deben estar en español
+  - Debes tener en cuenta que se debe dar prioridad a algún patron de diseño de ser necesario.
+  - las interfaces no deben empezar con I es una convención que ya no se usa hoy en dia en Typescript
+  - los test que se generen deben tener la extension *.spec.ts y claramente deben ser en typescript
+  - cuando se creen los test estos deben tener un describe que encapsule todo el cual debe tener la palabra "Testing {nameClass} class" donde nameClass es el nombre de la clase a probar siempre y cuando fuese una clase lo que se va a probar
+  - Los test deben crearse si y solo si yo te lo pido.
+  - se debe usar yarn como package manager.
+  - En caso se tengan que ejecutar comandos, no los ejecutes, dime lo que tengo que ejecutar para yo mismo hacerlo
