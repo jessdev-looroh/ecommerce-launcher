@@ -62,6 +62,8 @@ services:
       - PORT=3002
       - NATS_SERVERS=nats://nats-server:4222
       - DATABASE_URL=${ORDERS_DATABASE_URL}
+      - QR_TOKEN_EXP=${QR_TOKEN_EXP}
+      - QR_TOKEN_SECRET=${QR_TOKEN_SECRET}
     depends_on:
       orders-database:
         condition: service_healthy
