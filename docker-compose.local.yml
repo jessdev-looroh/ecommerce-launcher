@@ -1,4 +1,5 @@
 version: "3"
+name: ecommerce-launcher-local-v1.0.0
 
 services:
   nats-server:
@@ -7,6 +8,8 @@ services:
       - 8222:8222
   client-gateway:
     build: ./client-gateway
+    image: client-gateway-local
+    
     ports:
       - ${CLIENT_GATEWAY_PORT}:3000
     volumes:
@@ -22,6 +25,7 @@ services:
 
   payments-ms:
     build: ./payments-ms
+    image: payments-ms-local
     volumes:
       - ./payments-ms/src:/usr/src/app/src
     command: yarn run start:dev
@@ -36,9 +40,15 @@ services:
       - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
       - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
       - AWS_S3_BUCKET_NAME=${AWS_S3_BUCKET_NAME}
+      - CRYPTO_MASTER_KEY=${CRYPTO_MASTER_KEY}
+      - CRYPTO_ALGORITHM=${CRYPTO_ALGORITHM}
+      - PAYMENT_CONFIG_TABLE=${PAYMENT_CONFIG_TABLE}
+
+
   
   auth-ms:
     build: ./auth-ms
+    image: auth-ms-local 
     volumes:
       - ./auth-ms/src:/usr/src/app/src
     command: yarn run start:dev
@@ -55,6 +65,7 @@ services:
 
   orders-ms:
     build: ./orders-ms
+    image: orders-ms-local
     volumes:
       - ./orders-ms/src:/usr/src/app/src
     command: yarn run start:dev
@@ -64,30 +75,10 @@ services:
       - DATABASE_URL=${ORDERS_DATABASE_URL}
       - QR_TOKEN_EXP=${QR_TOKEN_EXP}
       - QR_TOKEN_SECRET=${QR_TOKEN_SECRET}
-    depends_on:
-      orders-database:
-        condition: service_healthy
-
-  orders-database:
-    image: postgres:16.2
-    restart: always
-    volumes:
-      - ./orders-ms/postgres:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=ordersdb
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
 
   products-ms:
     build: ./products-ms
+    image: products-ms-local
     volumes:
       - ./products-ms/src:/usr/src/app/src
     command: yarn run start:dev
@@ -95,24 +86,6 @@ services:
       - PORT=3001
       - NATS_SERVERS=nats://nats-server:4222
       - DATABASE_URL=${PRODUCTS_DATABASE_URL}
-    depends_on:
-      products-database:
-        condition: service_healthy
+
     
   
-  products-database:
-    image: postgres:16.2
-    restart: always
-    volumes:
-      - ./products-ms/postgres:/var/lib/postgresql/data
-    ports:
-      - 5433:5432
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=productsdb
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
