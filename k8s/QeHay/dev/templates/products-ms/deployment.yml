@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: products-ms-dev
+  name: products-ms-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products-ms-dev
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: products-ms-dev
+    spec:
+      containers:
+        - image: southamerica-east1-docker.pkg.dev/qehay-ms/qehay-image-register/products-ms-dev
+          name: products-ms-dev
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NATS_SERVERS
+              value: "nats://nats-dev:4222"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: products-ms-secrets
+                  key: database_url
+
+          resources: {}
+status: {}

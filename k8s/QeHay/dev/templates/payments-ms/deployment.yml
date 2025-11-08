@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: payments-ms-dev
+  name: payments-ms-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments-ms-dev
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: payments-ms-dev
+    spec:
+      containers:
+        - image: southamerica-east1-docker.pkg.dev/qehay-ms/qehay-image-register/payments-ms-dev
+          name: payments-ms-dev
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NATS_SERVERS
+              value: "nats://nats-dev"
+            - name: STRIPE_SUCCESS_URL
+              value: "http://localhost:3000/api/payments/success"
+            - name: STRIPE_CANCEL_URL
+              value: "http://localhost:3000/api/payments/cancel"
+            - name: AWS_REGION
+              value: "us-east-2"
+            - name: AWS_S3_BUCKET_NAME
+              value: "payment-audit-logs-test"
+            - name: PAYMENT_CONFIG_TABLE
+              value: "paymentMethodsByRestaurants"
+            - name: STRIPE_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: payments-ms-secrets
+                  key: stripe_secret
+            - name: STRIPE_ENDPOINT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: payments-ms-secrets
+                  key: stripe_endpoint_secret
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: payments-ms-secrets
+                  key: aws_access_key
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: payments-ms-secrets
+                  key: aws_secret_access_key
+            - name: CRYPTO_MASTER_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: payments-ms-secrets
+                  key: crypto_master_key
+            - name: CRYPTO_ALGORITHM
+              valueFrom:
+                secretKeyRef:
+                  name: payments-ms-secrets
+                  key: crypto_algorithm
+          resources: {}
+status: {}

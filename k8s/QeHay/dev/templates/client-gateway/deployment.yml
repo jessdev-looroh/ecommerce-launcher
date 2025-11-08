@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: client-gateway-dev
+  name: client-gateway-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-gateway-dev
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: client-gateway-dev
+    spec:
+      containers:
+      - image: southamerica-east1-docker.pkg.dev/qehay-ms/qehay-image-register/client-gw-dev
+        name: client-gw-dev
+        env:
+        - name: PORT
+          value: "3000"
+        - name: NATS_SERVERS
+          value: "nats://nats-dev"
+        - name: JWT_ACCESS_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: auth-ms-secrets
+              key: jwt_access_secret
+        resources: {}
+status: {}

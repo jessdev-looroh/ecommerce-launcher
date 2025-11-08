@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: auth-ms-dev
+  name: auth-ms-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-ms-dev
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: auth-ms-dev
+    spec:
+      containers:
+        - image: southamerica-east1-docker.pkg.dev/qehay-ms/qehay-image-register/auth-ms-dev
+          name: auth-ms-dev
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NATS_SERVERS
+              value: "nats://nats-dev"
+            - name: JWT_ACCESS_EXPIRATION
+              value: "3600"
+            - name: JWT_REFRESH_EXPIRATION
+              value: "604800"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: auth-ms-secrets
+                  key: database_url
+            - name: JWT_ACCESS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-ms-secrets
+                  key: jwt_access_secret
+            - name: JWT_REFRESH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: auth-ms-secrets
+                  key: jwt_refresh_secret
+
+          resources: {}
+status: {}
