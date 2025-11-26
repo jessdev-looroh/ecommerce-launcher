@@ -24,9 +24,9 @@ spec:
             - name: NATS_SERVERS
               value: "nats://nats-dev"
             - name: STRIPE_SUCCESS_URL
-              value: "http://136.110.224.25/api/payments/success"
+              value: "http://localhost:3000/api/payments/success"
             - name: STRIPE_CANCEL_URL
-              value: "http://136.110.224.25/api/payments/cancel"
+              value: "http://localhost:3000/api/payments/cancel"
             - name: AWS_REGION
               value: "us-east-2"
             - name: AWS_S3_BUCKET_NAME
@@ -63,5 +63,5 @@ spec:
                 secretKeyRef:
                   name: payments-ms-secrets
                   key: crypto_algorithm
-          resources: {{- toYaml .Values.resources | nindent 12 }}
+          resources: {}
 status: {}

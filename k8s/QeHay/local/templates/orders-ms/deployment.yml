@@ -36,5 +36,5 @@ spec:
                   name: orders-ms-secrets
                   key: qr_token_secret
 
-          resources: {{- toYaml .Values.resources | nindent 12 }}
+          resources: {}
 status: {}

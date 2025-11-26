@@ -1,0 +1,8 @@
+# values.yaml
+resources:
+  requests:
+    cpu: "100m"      # 0.1 núcleos de CPU garantizados
+    memory: "256Mi"  # 256 MB de RAM garantizados
+  limits:
+    cpu: "500m"      # Máximo 0.5 núcleos de CPU que puede usar
+    memory: "512Mi"  # Máximo 512 MB de RAM que puede usar

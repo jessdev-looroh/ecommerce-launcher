@@ -4,5 +4,7 @@
         "Qstn",
         "culqi",
         "nats"
-    ]
+    ],
+    "prisma.pinToPrisma6": true
+
 }

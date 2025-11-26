@@ -6,7 +6,9 @@ projectContext:
     QeHay es un sistema avanzado de gestión de restaurantes híbrido (offline/online).
     Sus módulos principales son:
       - Cliente: App Movil/Web (React Native/ React) conectada a la nube, que permite a los clientes ver el menú, realizar pedidos, generar códigos QR y seguir el estado de su orden en tiempo real. 
-        El cliente puede generar 3 tipos de orden IN_DINNER, DELIVERY y PICKUP 
+        El cliente puede generar 3 tipos de orden IN_DINNER, DELIVERY y PICKUP.
+        IN_DINNER: se crea a la orden  (CREATED) y se genera un QR el cual sera escaneado por el mozo y este dará recién su confirmation (CONFIRMED)
+        DELIVERY O PICKUP: Se crea la orden (CREATED), se va al checkout se hace el pago con pasarela de pago y la orden cambia a (CONFIRMED)
       - Mozo: (App Flutter) Módulo para meseros, disponible localmente, que escanea el QR del cliente,
         confirma la orden y la envía a cocina.
       - Cocina: (App Flutter) Módulo local que muestra pedidos y estados (pendiente, cocinando, listo).
@@ -15,7 +17,7 @@ projectContext:
         recomendaciones y automatización de la gestión del restaurante.
 
     Tecnologías principales:
-      - Frontend: React (web) y Flutter (móvil).
+      - Frontend: React (web y móvil) y Flutter (móvil).
       - Backend: FastAPI (Python), NestJS (NodeJS), Serverless
       - Infraestructura: AWS (SNS, SQS, Lambda, API Gateway, RDS PostgreSQL, DynamoDB, MongoDB).
       - Bases de datos:

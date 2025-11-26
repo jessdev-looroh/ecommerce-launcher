@@ -28,5 +28,5 @@ spec:
             secretKeyRef:
               name: auth-ms-secrets
               key: jwt_access_secret
-        resources: {{- toYaml .Values.resources | nindent 12 }}
+        resources: {}
 status: {}

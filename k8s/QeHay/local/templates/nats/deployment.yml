@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nats-dev
+  name: nats-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nats-dev
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: nats-dev
+    spec:
+      containers:
+      - image: nats
+        name: nats-dev
+        resources: {}
+status: {}

@@ -29,5 +29,5 @@ spec:
                   name: products-ms-secrets
                   key: database_url
 
-          resources: {{- toYaml .Values.resources | nindent 12 }}
+          resources: {}
 status: {}

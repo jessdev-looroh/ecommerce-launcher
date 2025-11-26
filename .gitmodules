@@ -13,3 +13,6 @@
 [submodule "auth-ms"]
 	path = auth-ms
 	url = https://github.com/jessdev-looroh/auth-ms.git
+[submodule "packages/qeai-sdk"]
+	path = packages/qeai-sdk
+	url = https://github.com/jessdev-looroh/qeai-sdk.git
